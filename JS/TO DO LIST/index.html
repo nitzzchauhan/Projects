@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    /* html{
+
+        background-color: #333;
+    } */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 50px;
+    }
+    h1 {
+      color: #333;
+    }
+    #taskInput {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    #addTaskButton {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    #addTaskButton:hover {
+      background-color: #218838;
+    }
+    #taskList {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    .task {
+      padding: 10px;
+      background-color: white;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+    .deleteButton {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .deleteButton:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <h1>To-Do List</h1>
+  <input type="text" id="taskInput" placeholder="Enter a new task">
+  <button id="addTaskButton">Add Task</button>
+  <ul id="taskList"></ul>
+
+  <script src="indext.js"></script>
+</body>
+</html>

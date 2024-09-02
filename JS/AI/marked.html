@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Markdown to HTML Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        padding: 20px;
+      }
+      #markdown-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="markdown-content"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+      // Example markdown content
+      const markdown = `
+# Welcome to Markdown
+
+This is a simple markdown example:
+
+- **Bold Text**
+- *Italic Text*
+- [Link to OpenAI](https://www.openai.com)
+      
+\`\`\`javascript
+// Code block example
+console.log('Hello, Markdown!');
+\`\`\`
+      `;
+
+      // Convert markdown to HTML
+      const htmlContent = marked.parse(markdown);
+
+      // Display the HTML content in the div
+      document.getElementById("markdown-content").innerHTML = htmlContent;
+    </script>
+  </body>
+</html>

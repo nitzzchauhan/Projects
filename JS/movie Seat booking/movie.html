@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Seat Booking</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: hsla(0, 0%, 100%, 0.311);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .screen {
+            background-color: #333;
+            height: 50px;
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .seat {
+            background-color: #444;
+            height: 25px;
+            width: 25px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .seat.selected {
+            background-color: #6feaf6;
+        }
+
+        .seat.occupied {
+            background-color: #444;
+            cursor: not-allowed;
+        }
+
+        .seat:hover:not(.occupied) {
+            background-color: #ccc;
+        }
+
+        .seat-label {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .row label {
+            font-size: 16px;
+        }
+
+        .info {
+            margin: 20px 0;
+        }
+
+        .info span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin: 0 10px;
+        }
+
+        .info .selected {
+            background-color: #6feaf6;
+        }
+
+        .info .occupied {
+            background-color: #444;
+        }
+
+        .info .available {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Select Your Seats</h2>
+    <div class="screen"></div>
+
+    <div class="row">
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat occupied"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+    </div>
+
+    <div class="row">
+        <div class="seat"></div>
+        <div class="seat occupied"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat occupied"></div>
+        <div class="seat"></div>
+    </div>
+
+    <div class="row">
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat occupied"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+    </div>
+
+    <div class="info">
+        <div>
+            <span class="seat available"></span> Available
+            <span class="seat selected"></span> Selected
+            <span class="seat occupied"></span> Occupied
+        </div>
+        <p>You have selected <span id="count">0</span> seats for a price of $<span id="total">0</span></p>
+    </div>
+</div>
+
+<script src="movie.js"></script>
+
+</body>
+</html>
