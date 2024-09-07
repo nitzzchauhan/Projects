@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Search Filter</title>
+    <style>
+        /* CSS styles */
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+
+        .search-container {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 10px 40px 10px 10px; /* accommodate clear button */
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #searchInput:focus {
+            border-color: #007bff;
+        }
+
+        #clearSearch {
+            position: absolute;
+            right: 30px;
+            top: 25px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            display: none;
+            outline: none;
+        }
+
+        #clearSearch::before {
+            content: '✖';
+        }
+
+        #itemList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        #itemList li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #itemList li:hover {
+            background-color: #f9f9f9;
+        }
+
+        .highlight {
+            background-color: #ffc107;
+            color: #000;
+            font-weight: bold;
+        }
+
+        #noResults {
+            display: none;
+            padding: 10px;
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search items..." autofocus>
+        <button id="clearSearch"></button>
+        <ul id="itemList">
+            <li>Apple</li>
+            <li>Banana</li>
+            <li>Orange</li>
+            <li>Pineapple</li>
+            <li>Mango</li>
+            <li>Strawberry</li>
+            <li>Blueberry</li>
+            <li>Grapes</li>
+            <li>Watermelon</li>
+            <li>Kiwi</li>
+            <li>Cherry</li>
+            <li>Peach</li>
+            <li>Plum</li>
+            <li>Apricot</li>
+            <li>Avocado</li>
+        </ul>
+        <div id="noResults">No items match your search.</div>
+    </div>
+
+    <script>
+        // JavaScript functionality
+
+        const searchInput = document.getElementById('searchInput');
+        const itemList = document.getElementById('itemList');
+        const clearButton = document.getElementById('clearSearch');
+        const noResults = document.getElementById('noResults');
+
+        // Event Listeners
+        searchInput.addEventListener('input', handleSearch);
+        searchInput.addEventListener('keyup', handleKeyUp);
+        searchInput.addEventListener('focus', handleFocus);
+        searchInput.addEventListener('blur', handleBlur);
+        clearButton.addEventListener('click', clearSearch);
+
+        // Handle the search functionality
+        function handleSearch() {
+            const filter = searchInput.value.trim().toLowerCase();
+            const items = itemList.querySelectorAll('li');
+            let visibleCount = 0;
+
+            items.forEach(function(item) {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    item.style.display = '';
+                    highlightText(item, filter);
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                    removeHighlight(item);
+                }
+            });
+
+            // Show or hide the clear button
+            if (filter.length > 0) {
+                clearButton.style.display = 'inline';
+            } else {
+                clearButton.style.display = 'none';
+            }
+
+            // Show or hide the "No results" message
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+
+        // Placeholder for keyup events (optional)
+        function handleKeyUp(event) {
+            // For future use, e.g., handling arrow keys for navigation
+        }
+
+        // Placeholder for focus event (optional)
+        function handleFocus() {
+            // Additional actions on focus if needed
+        }
+
+        // Placeholder for blur event (optional)
+        function handleBlur() {
+            // Additional actions on blur if needed
+        }
+
+        // Highlight matched text in the list items
+        function highlightText(item, filter) {
+            if (!filter) {
+                removeHighlight(item);
+                return;
+            }
+            const text = item.textContent;
+            const regex = new RegExp(escapeRegExp(filter), 'gi');
+            const escapedText = escapeHTML(text);
+            const highlightedText = escapedText.replace(regex, '<span class="highlight">$&</span>');
+            item.innerHTML = highlightedText;
+        }
+
+        // Remove any existing highlights
+        function removeHighlight(item) {
+            item.innerHTML = escapeHTML(item.textContent);
+        }
+
+        // Clear the search input and reset the list
+        function clearSearch() {
+            searchInput.value = '';
+            clearButton.style.display = 'none';
+            const items = itemList.querySelectorAll('li');
+            items.forEach(function(item) {
+                item.style.display = '';
+                removeHighlight(item);
+            });
+            noResults.style.display = 'none';
+            searchInput.focus();
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHTML(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Escape special characters for use in RegExp
+        function escapeRegExp(text) {
+            return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+    </script>
+</body>
+</html>

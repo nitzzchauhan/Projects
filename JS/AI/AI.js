@@ -41,7 +41,7 @@ async function generateInfo() {
     const apiMessage = document.createElement("div");
     apiMessage.className = "message";
 
-    apiMessage.innerHTML = marked.parse(result.candidates[0].content.parts[0].text);
+    apiMessage.innerHTML = result.candidates[0].content.parts[0].text  // marked.parse(result.candidates[0].content.parts[0].text);
 
     card.appendChild(apiMessage);
 

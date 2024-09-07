@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Example</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #result { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>AJAX Request Example</h1>
+
+    <button id="loadDataBtn">Load Data</button>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('loadDataBtn').addEventListener('click', function() {
+            // Create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+
+            // Configure it: GET-request for the URL /data.json (or your own endpoint)
+            xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts/1', true);
+
+            // Set up the callback for when the request is complete
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Parse the JSON response
+                    var response = JSON.parse(xhr.responseText);
+
+                    // Do something with the response
+                    const res = JSON.stringify(response)
+                    console.log(JSON.stringify(response));
+
+                    // Display the result in the HTML
+                    document.getElementById('result').innerHTML = 
+                        `<h2>${res}</h2>`;
+                }
+            };
+
+            // Send the request
+            xhr.send();
+        });
+    </script>
+</body>
+</html>
