@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project- Color change</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+      }
+
+      .box {
+        width: 200px;
+        height: 200px;
+        border: 2px solid rgb(0, 0, 0);
+        margin: 15px;
+        text-align: center;
+        padding-top: 80px;
+        font-size: 30px;
+        cursor: pointer;
+      }
+      #grey {
+        background-color: grey;
+      }
+      #pink {
+        background-color: pink;
+      }
+      #aqua {
+        background-color: aqua;
+      }
+      #yellow {
+        background-color: yellow;
+      }
+
+      #plum {
+        background-color: plum;
+      }
+      h1 {
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: center;
+      }
+      .navbar ul li a {
+        text-decoration: none;
+        color: black;
+        margin: 10px;
+        border: 2px solid black;
+        padding: 10px;
+        border-radius: 12px;
+        background-color: blanchedalmond;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .navbar ul li {
+        list-style-type: none;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <nav class="navbar">
+        <ul>
+            <li><a href="https://www.google.com/" target="_blank">Google</a></li>
+            <li><a href="https://www.youtube.com/" target="_blank">Youtube</a></li>
+        </ul>
+    </nav> -->
+    <h1>Color Scheme Switcher</h1>
+    <div class="container">
+      <div class="box" id="grey">Grey</div>
+      <div class="box" id="pink">Pink</div>
+      <div class="box" id="aqua">Aqua</div>
+      <div class="box" id="yellow">Yellow</div>
+      <div class="box" id="plum">Plum</div>
+    </div>
+    <div>
+      <h2>
+        Try Clicking on one of the colors above to change the background color
+        of this page!
+      </h2>
+    </div>
+
+    <script>
+      // alert("This is not allowed");
+
+      // to create element and apply click event in script
+      const div1 = document.createElement("div1");
+      console.log(div1);
+      div1.id = "new_element";
+      const addText = document.createTextNode("Hiiii Nitin");
+      div1.appendChild(addText);
+      document.body.appendChild(div1);
+      document.querySelector("div1");
+      Object.assign(div1.style, {
+        backgroundColor: "blanchedalmond",
+        border: "2px solid black",
+        width: "100px",
+        height: "30px",
+        padding: "12px",
+        borderRadius: "12px",
+        // paddingTop :'3px',
+        textAlign: "center",
+        cursor: "pointer",
+      });
+
+    //   div1.style.backgroundColor = 'blanchedalmond'
+    //   div1.style.border = '2px solid black'
+    //   div1.style.width = '100px'
+    //   div1.style.height = '30px'
+    //   div1.style.borderRadius = '12px'
+    //   div1.style.textAlign = 'center'
+    //   div1.style.paddingTop ='3px'
+    //   div1.style.padding ='12px'
+    //   div1.style.cursor = 'pointer'
+
+      const div2 = document.querySelectorAll("div1");
+      console.log(div2);
+      const body1 = document.querySelector("body");
+      div2.forEach((div2) => {
+        console.log(div2);
+        div2.addEventListener("click", (e) => {
+          console.log(event);
+          console.log(event.target);
+          if (e.target.id === "new_element") {
+            body.style.backgroundColor = "blanchedalmond";
+          }
+        });
+      });
+
+      //++++++++++++++++++++++++++++++++++++++++++++++++
+
+      const box = document.querySelectorAll(".box");
+      // console.log(box);
+      const body = document.querySelector("body");
+
+      box.forEach((box) => {
+        console.log(box);
+        box.addEventListener("click", (e) => {
+          console.log(e);
+          console.log(e.target);
+          if (e.target.id === "grey") {
+            body.style.backgroundColor = e.target.id;
+          }
+          if (e.target.id === "pink") {
+            body.style.backgroundColor = e.target.id;
+          }
+          if (e.target.id === "aqua") {
+            body.style.backgroundColor = e.target.id;
+          }
+          if (e.target.id === "yellow") {
+            body.style.backgroundColor = e.target.id;
+          }
+          if (e.target.id === "plum") {
+            body.style.backgroundColor = e.target.id;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
