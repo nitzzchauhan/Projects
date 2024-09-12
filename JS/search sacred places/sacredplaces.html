@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Sacredpower</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0%;
+      }
+      input {
+        border: rgb(29, 155, 240);
+        height: 30px;
+        border-radius: 20px;
+        padding-left: 10px;
+        font-size: larger;
+      }
+      table {
+        border: rgb(29, 155, 240);
+        color: aliceblue;
+      }
+      .black {
+        height: 33vh;
+        background-color: black;
+      }
+      .grey {
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <div class="black">
+        <input
+          type="text"
+          id="av"
+          style="width: 80%; margin-top: 100px"
+          onkeyup="call()"
+        />
+      </div>
+      <div class="grey">
+        <div id="sp"></div>
+      </div>
+    </center>
+    <script>
+      function call() {
+        var sacredplaces = {
+          "001": {
+            Placename: "Krishna Janmbhoomi",
+            About: "Lord Krishna resides here",
+            City: "Mathura",
+            State: "Uttar Pradesh",
+            Pictures: "1.png",
+          },
+          "002": {
+            Placename: "Mahendipur Balaji",
+            About: "Lord Hanuman resides here",
+            City: "Dausa",
+            State: "Rajasthan",
+            Pictures: "2.png",
+          },
+          "003": {
+            Placename: "Shri Jagannath Puri Temple",
+            About: "Lord Jaganath resides here",
+            City: "Eastern Coast of India",
+            State: "Odissa",
+            Pictures: "3.png",
+          },
+          "004": {
+            Placename: "Khedapati Hanuman",
+            About: "Lord Hanuman resides here",
+            City: "Gwalior",
+            State: "Madhya Pradesh",
+            Pictures: "4.png",
+          },
+        };
+        var a = Object.keys(sacredplaces);
+        var b = Object.values(sacredplaces);
+        var c = b.filter((item) => {
+          return (
+            item.Placename.toUpperCase().includes(av.value.toUpperCase()) ||
+            item.About.toUpperCase().includes(av.value.toUpperCase()) ||
+            item.State.toUpperCase().includes(av.value.toUpperCase()) ||
+            item.City.toUpperCase().includes(av.value.toUpperCase())
+          );
+        });
+        console.log(c);
+
+        var inTable = `<table border="1" width="80%"> <caption><h3>List of Sacred places</h3></caption>`;
+        inTable += `<tr><th>ID</th><th>Placename</th><th>About</th><th>City</th><th>State</th><th>Pictures</th></tr>`;
+        c.map((item, i) => {
+          inTable += `<tr><th>${a[i]}</th><th>${c[i]["Placename"]}</th><th>${c[i]["About"]}</th><th>${c[i]["City"]}</th><th>${c[i]["State"]}</th><th><img width="90" src="${c[i]["Pictures"]}"></th></tr>`;
+        });
+
+        inTable += `</table>`;
+
+        sp.innerHTML = inTable;
+      }
+    </script>
+  </body>
+</html>

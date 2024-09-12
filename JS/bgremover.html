@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Background Remover App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+      }
+      canvas,
+      img {
+        max-width: 100%;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Background Remover App</h1>
+    <input type="file" id="upload" accept="image/*" />
+    <br />
+    <canvas id="canvas"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0.5"></script>
+    <script >
+      // Select elements
+      const upload = document.getElementById("upload");
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      // Load BodyPix model
+      let net;
+      async function loadModel() {
+        net = await bodyPix.load();
+        console.log("BodyPix model loaded");
+      }
+      loadModel();
+
+      // Handle image upload
+      upload.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          const img = new Image();
+          img.src = e.target.result;
+          img.onload = () => {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            removeBackground(img);
+          };
+        };
+
+        reader.readAsDataURL(file);
+      });
+
+      // Remove the background
+      async function removeBackground(img) {
+        const segmentation = await net.segmentPerson(canvas);
+
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imgData.data;
+
+        // Loop through all pixels and remove background
+        for (let i = 0; i < data.length; i += 4) {
+          const [r, g, b, a] = data.slice(i, i + 4);
+          const shouldKeep = segmentation.data[i / 4];
+
+          if (!shouldKeep) {
+            // Set background pixels to transparent
+            data[i + 3] = 0;
+          }
+        }
+
+        // Update canvas with background removed
+        ctx.putImageData(imgData, 0, 0);
+      }
+    </script>
+  </body>
+</html>

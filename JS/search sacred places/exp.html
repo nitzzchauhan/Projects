@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXperiment</title>
+</head>
+<body>
+    <input type="text" name="av" id="av" onkeyup="call()">
+    
+    <div id="hi"></div>
+    <script>
+
+        function call(){
+
+            var sacredplaces = {"001":{"Placename":"Krishna Janmbhoomi","About":"Lord Krishna resides here","City":"Mathura", "State":"Uttar Pradesh","Pictures":"123"},
+            "002":{"Placename":"Mahendipur Balaji","About":"Lord Hanuman resides here","City":"Dausa", "State":"Rajasthan","Pictures":"123"},
+            "003":{"Placename":"Shri Jagannath Puri Temple","About":"Lord Jaganath resides here","City":"Eastern Coast of India", "State":"Odissa","Pictures":"123"},
+            "004":{"Placename":"Khedapati Hanuman","About":"Lord Hanuman resides here","City":"Gwalior", "State":"Madhya Pradesh","Pictures":"123"},
+        }
+        var a = Object.keys(sacredplaces)
+        var b = Object.values(sacredplaces)
+        var c = b.filter((item)=>  {return item.Placename.toUpperCase().includes((av.value).toUpperCase()) || item.About.toUpperCase().includes((av.value).toUpperCase()) || item.State.toUpperCase().includes((av.value).toUpperCase()) || item.City.toUpperCase().includes((av.value).toUpperCase())} )
+        console.log(c)
+    }
+    </script>
+</body>
+</html>
