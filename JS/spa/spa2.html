@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History API Routing</title>
+</head>
+<body>
+    <nav>
+        <a href="/" data-link>Home</a>
+        <a href="/about" data-link>About</a>
+        <a href="/contact" data-link>Contact</a>
+    </nav>
+
+    <div id="content"></div>
+
+    <script>
+        // Routes configuration
+        const routes = {
+            '/': 'Welcome to the Home Page!',
+            '/about': 'Learn more about us on the About Page.',
+            '/contact': 'Feel free to reach us on the Contact Page.'
+        };
+
+        // Navigate function using history API
+        function navigateTo(url) {
+            history.pushState(null, null, url); // Update URL
+            handleRouteChange(); // Load new content
+        }
+
+        // Function to handle route changes
+        function handleRouteChange() {
+            const path = window.location.pathname; // Get current path
+            const content = routes[path] || '404 Page Not Found'; // Default to 404 if route doesn't exist
+            document.getElementById('content').innerHTML = content;
+        }
+
+        // Handle browser back/forward buttons
+        // window.addEventListener('popstate', handleRouteChange);
+
+        // Intercept clicks on links to handle navigation without reload
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('[data-link]')) {
+                e.preventDefault();
+                navigateTo(e.target.href); // Navigate to new route
+            }
+        });
+
+        // Load the initial content on page load
+        window.addEventListener('load', handleRouteChange);
+
+    </script>
+</body>
+</html>

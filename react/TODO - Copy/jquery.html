@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery Example</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+  <script>
+    $(document).ready(function() {
+      // Change text color on button click
+      $('#changeTextColor').click(function() {
+        $('#text').css('color', 'red');
+      });
+    });
+  </script>
+</head>
+<body>
+  <p id="text">This is a paragraph.</p>
+  <button id="changeTextColor">Change Text Color</button>
+</body>
+</html>
