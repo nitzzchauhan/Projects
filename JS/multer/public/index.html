@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+</head>
+<body>
+    <h2>Upload an Image</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" />
+        <button type="submit">Upload</button>
+    </form>
+
+    <h3>Uploaded Files:</h3>
+    <ul id="fileList"></ul>
+
+    <script>
+        // Fetch and list uploaded files
+        fetch('/uploads').then(response => response.json())
+        .then(files => {
+            const fileList = document.getElementById('fileList');
+            files.forEach(file => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="/uploads/${file}">${file}</a>`;
+                fileList.appendChild(li);
+            });
+        }).catch(err => {
+            console.error('Error fetching uploaded files:', err);
+        });
+    </script>
+</body>
+</html>
