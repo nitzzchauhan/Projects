@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Search Filter</title>
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Container for search input */
+      .search-container {
+        height: 35vh;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      /* Styling for the search input */
+      .search-input {
+        width: 70%;
+        padding: 10px 20px;
+        border: 2px solid #1d9bf0;
+        border-radius: 25px;
+        font-size: 1.2rem;
+        color: #333;
+        transition: border-color 0.3s;
+      }
+
+      /* Hover and focus effects for the input */
+      .search-input:focus {
+        outline: none;
+        border-color: #005f9e;
+      }
+
+      /* Container for the search results */
+      .results-container {
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 30px;
+        min-height: 65vh;
+        color: #fff;
+      }
+
+      /* Table styling */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #555;
+      }
+
+      th {
+        background-color: #1d9bf0;
+      }
+
+      td {
+        background-color: #333;
+      }
+
+      /* Image styling */
+      img {
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="search-container">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Search places..."
+        onkeyup="filterPlaces()"
+      />
+    </div>
+
+    <div class="results-container">
+      <div id="resultsTable"></div>
+    </div>
+
+    <script>
+      function filterPlaces() {
+        const sacredPlaces = {
+          "001": {
+            placeName: "Krishna Janmbhoomi",
+            description: "Lord Krishna resides here",
+            city: "Mathura",
+            state: "Uttar Pradesh",
+            picture: "1.png",
+          },
+          "002": {
+            placeName: "Mahendipur Balaji",
+            description: "Lord Hanuman resides here",
+            city: "Dausa",
+            state: "Rajasthan",
+            picture: "2.png",
+          },
+          "003": {
+            placeName: "Shri Jagannath Puri Temple",
+            description: "Lord Jagannath resides here",
+            city: "Eastern Coast of India",
+            state: "Odisha",
+            picture: "3.png",
+          },
+          "004": {
+            placeName: "Khedapati Hanuman",
+            description: "Lord Hanuman resides here",
+            city: "Gwalior",
+            state: "Madhya Pradesh",
+            picture: "4.png",
+          },
+        };
+
+        const searchValue = document.getElementById("searchInput").value.toUpperCase();
+        const keys = Object.keys(sacredPlaces);
+        const filteredPlaces = Object.values(sacredPlaces).filter((place) => {
+          return (
+            place.placeName.toUpperCase().includes(searchValue) ||
+            place.description.toUpperCase().includes(searchValue) ||
+            place.city.toUpperCase().includes(searchValue) ||
+            place.state.toUpperCase().includes(searchValue)
+          );
+        });
+
+        let tableHTML = `
+          <table>
+            <caption><h3>Search Results</h3></caption>
+            <tr>
+              <th>ID</th>
+              <th>Place Name</th>
+              <th>Description</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Image</th>
+            </tr>
+        `;
+
+        filteredPlaces.forEach((place, index) => {
+          tableHTML += `
+            <tr>
+              <td>${keys[index]}</td>
+              <td>${place.placeName}</td>
+              <td>${place.description}</td>
+              <td>${place.city}</td>
+              <td>${place.state}</td>
+              <td><img width="90" src="${place.picture}" alt="${place.placeName}"></td>
+            </tr>
+          `;
+        });
+
+        tableHTML += `</table>`;
+
+        document.getElementById("resultsTable").innerHTML = tableHTML;
+      }
+    </script>
+  </body>
+</html>
