@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Dynamic Search</title>
+    <style>
+      .btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #1d9bf0;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #005f9e;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Search container */
+      .search-container {
+        background: linear-gradient(
+          to right,
+          rgb(205, 129, 141),
+          rgb(211, 19, 211),
+          darkred
+        );
+        display: flex;
+        /* align-content: center; */
+        height: 30vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      /* Search input styling */
+      .search-input {
+        width: 70%;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        /* margin-bottom: 20px; */
+      }
+
+      .results-container {
+        padding: 20px;
+        color: white;
+        text-align: center;
+        /* background-color:aquamarine */
+      }
+
+      table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        color: white;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid #555;
+      }
+
+      th {
+        background-color: #1d9bf0;
+      }
+
+      td {
+        background-color: #333;
+      }
+
+      img {
+        border-radius: 10px;
+        width: 80px;
+      }
+    </style>
+  </head>
+
+  <body style="background-color: #000000">
+    <div class="search-container" style="display: flex; al">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Search places..."
+        onkeyup="filterPlaces()"
+      />
+      <div class="button-container">
+        <button class="btn" onclick="clearSearch()">Clear Search</button>
+      </div>
+    </div>
+
+    <div class="results-container">
+      <div id="resultsTable"></div>
+    </div>
+
+    <script>
+      const sacredPlaces = {
+        "001": {
+          placeName: "Saint Peter's Basilica",
+          description: "A major basilica of the Catholic Church",
+          city: "Vatican City",
+          state: "Vatican City State",
+          picture: "1.png",
+        },
+        "002": {
+          placeName: "Mecca",
+          description: "The holiest city in Islam",
+          city: "Mecca",
+          state: "Makkah Province",
+          picture: "2.png",
+        },
+        "003": {
+          placeName: "The Western Wall",
+          description: "A sacred site in Judaism",
+          city: "Jerusalem",
+          state: "Jerusalem District",
+          picture: "3.png",
+        },
+        "004": {
+          placeName: "Kashi Vishwanath Temple",
+          description: "A major Hindu temple dedicated to Lord Shiva",
+          city: "Varanasi",
+          state: "Uttar Pradesh",
+          picture: "4.png",
+        },
+        "005": {
+          placeName: "Shwedagon Pagoda",
+          description: "A sacred Buddhist pagoda",
+          city: "Yangon",
+          state: "Yangon Region",
+          picture: "5.png",
+        },
+        "006": {
+          placeName: "Notre-Dame Cathedral",
+          description: "A famous Catholic cathedral",
+          city: "Paris",
+          state: "Île-de-France",
+          picture: "6.png",
+        },
+        "007": {
+          placeName: "Golden Temple",
+          description: "The holiest site in Sikhism",
+          city: "Amritsar",
+          state: "Punjab",
+          picture: "7.png",
+        },
+        "008": {
+          placeName: "Mount Sinai",
+          description: "A sacred mountain in Christianity, Judaism, and Islam",
+          city: "South Sinai",
+          state: "Sinai Peninsula",
+          picture: "8.png",
+        },
+        "009": {
+          placeName: "Bodhi Tree",
+          description: "The place where Buddha attained enlightenment",
+          city: "Bodh Gaya",
+          state: "Bihar",
+          picture: "9.png",
+        },
+        "010": {
+          placeName: "Angkor Wat",
+          description: "A major Hindu temple complex",
+          city: "Siem Reap",
+          state: "Siem Reap Province",
+          picture: "10.png",
+        },
+      };
+
+      function filterPlaces() {
+        const searchValue = document
+          .getElementById("searchInput")
+          .value.toUpperCase();
+        const filteredPlaces = Object.values(sacredPlaces).filter((place) => {
+          return (
+            place.placeName.toUpperCase().includes(searchValue) ||
+            place.city.toUpperCase().includes(searchValue) ||
+            place.state.toUpperCase().includes(searchValue)
+          );
+        });
+
+        displayTable(filteredPlaces);
+      }
+
+      function displayTable(places) {
+        let table = `
+          <table>
+            <tr>
+              <th>Place Name</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Image</th>
+            </tr>
+        `;
+
+        places.forEach((place) => {
+          table += `
+            <tr>
+              <td>${place.placeName}</td>
+              <td>${place.city}</td>
+              <td>${place.state}</td>
+              <td><img src="${place.picture}" alt="${place.placeName}" /></td>
+            </tr>
+          `;
+        });
+
+        table += "</table>";
+
+        const searchValue = document.getElementById("searchInput");
+        console.log(searchValue.value);
+        if (searchValue.value == "") {
+          resultsTable.innerHTML = "";
+        } else {
+          document.getElementById("resultsTable").innerHTML = table;
+        }
+      }
+      function clearSearch() {
+        document.getElementById("searchInput").value = "";
+        resultsTable.innerHTML = "";
+      }
+    </script>
+  </body>
+</html>
+ 
