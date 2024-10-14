@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Model</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Notification container */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            display: none;
+            animation: slide-in 0.5s forwards;
+        }
+
+        /* Close button styling */
+        .notification button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 16px;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        /* Notification message */
+        .notification p {
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+        }
+
+        /* Slide-in animation */
+        @keyframes slide-in {
+            from {
+                right: -350px;
+                opacity: 0;
+            }
+            to {
+                right: 20px;
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Notification Box -->
+    <div class="notification" id="notificationBox">
+        <button onclick="closeNotification()">x</button>
+        <p>Success! Your action has been completed.</p>
+    </div>
+
+    <!-- Display Notification Button -->
+    <button onclick="showNotification()" style="margin: 20px;">Show Notification</button>
+
+    <script>
+        // Show notification
+        function showNotification() {
+            document.getElementById('notificationBox').style.display = 'block';
+        }
+
+        // Close notification
+        function closeNotification() {
+            document.getElementById('notificationBox').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
