@@ -34,7 +34,7 @@ $(document).ready(function() {
     }
 
     // Event listener for new quote button
-    $('#new-quote').click(function() {
+    $('#new-quote').click(function() {  
         const randomQuote = getRandomQuote();
         
         // Update the DOM with the new quote
