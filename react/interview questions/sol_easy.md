@@ -191,3 +191,14 @@ const listItems = items.map((item) =>
 ```
 
 In this example, the `key` attribute ensures that React can track each `<li>` element efficiently when the list changes. Using unique keys is crucial for ensuring React can perform updates optimally.
+
+
+
+
+var obj = {
+  a:45,
+  display: function(){
+    console.log(this.a);
+  }
+}
+var obj2 = Object.assign({},obj)
