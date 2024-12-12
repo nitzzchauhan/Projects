@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Image</title>
+</head>
+<body>
+  <label for="ss">Image</label>
+  <input type="file" name="" id="ss" accept="image/*">
+  <br><br>
+  <img id="imagePreview" style="display: none;" alt="Selected Image" />
+
+  <script>
+    const ss = document.querySelector('#ss');
+    const imgPreview = document.querySelector('#imagePreview');
+
+    ss.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        
+        reader.onload = function(event) {
+          imgPreview.src = event.target.result;
+          imgPreview.style.display = 'block';
+          ss.style.display = 'none';
+        }
+        
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -11,6 +11,7 @@ export const incrementAsync = createAsyncThunk(
     });
   }
 );
+ 
 
 // Define the slice
 export const counterSlice = createSlice({
@@ -31,18 +32,25 @@ export const counterSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // console.log(builder, incrementAsync)
+    
     builder
       .addCase(incrementAsync.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(incrementAsync.fulfilled, (state, action) => {
+      .addCase(incrementAsync.fulfilled, (state, action) =>
+        
+         {
+          console.log(action)
         state.status = 'idle';
         state.value += action.payload;
       });
   },
 });
 
-console.log(counterSlice.getSelectors())
+// console.log(counterSlice)
+
+
 
 // Export actions generated from the slice
 export const { increment, decrement, reset } = counterSlice.actions;

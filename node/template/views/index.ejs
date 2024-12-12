@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1><%= title %></h1>
+        <p>Welcome to our dynamic page displaying a list of users.</p>
+    </header>
+
+    <main>
+        <section class="user-list">
+            <% if (users && users.length > 0) { %>
+                <ul>
+                    <% users.forEach(user => { %>
+                        <li class="user-card">
+                            <h2><%= user.name %></h2>
+                            <p>Age: <%= user.age %></p>
+                            <p>Occupation: <%= user.occupation %></p>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>No users found!</p>
+            <% } %>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Dynamic EJS App</p>
+    </footer>
+</body>
+</html>
+

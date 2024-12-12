@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagonal Split Div</title>
+<style>
+  /* Container styling */
+  .split-div {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    background-color: #000; /* Black background */
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  /* Left side styling */
+  .split-div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FF6E6E; /* Pink color */
+    clip-path: polygon(0 0, 50% 0, 100% 100%, 0 100%);
+  }
+
+  /* Right side styling */
+  .split-div::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #A0522D; /* Brown color */
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 0 100%);
+  }
+</style>
+</head>
+<body>
+
+<div class="split-div"></div>
+
+<div class="lo">
+    hello world
+</div>
+
+</body>
+</html>
