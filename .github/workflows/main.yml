@@ -1,0 +1,19 @@
+name: Workflow with Email Identifier
+
+on:
+  # Runs when manually triggered
+  workflow_dispatch:
+  # Also runs on push to main branch
+  push:
+    branches: [ main ]
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 22f2001251@ds.study.iitm.ac.in
+        run: echo "Hello, world!"
+        
+      - name: Display date
+        run: date
